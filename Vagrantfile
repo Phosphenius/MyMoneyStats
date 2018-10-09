@@ -12,6 +12,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |vb|
       vb.memory = "512"
       vb.cpus = 1
+      vb.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ]
   end
 
   config.vm.provision "ansible_local" do |ansible|

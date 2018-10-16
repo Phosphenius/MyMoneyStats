@@ -1,4 +1,6 @@
+/*
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+*/
 
 
 body, ul {
@@ -14,8 +16,19 @@ a {
     text-decoration: none;
 }
 
+details {
+    display: inline;
+}
+
 body {
     padding-top: 35px;
+}
+
+.tag-selector {
+    .modal {
+        position: absolute;
+        background-color: white;
+    }
 }
 
 .entry-table {

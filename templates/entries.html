@@ -2,6 +2,10 @@
 
 {% block content %}
 
+<template id="">
+    <div class="tag"></div>
+</template>
+
 <form method="post" action="/create/entry">
 	<label for="amount">Amount</label>
 	<input id="amount" name="amount" type="number" placeholder="Amount" step="0.01" required>
@@ -9,27 +13,39 @@
 	<input id="desc" name="desc" type="text" placeholder="Description (optional)">
 	<label for="date">Date</label>
 	<input id="date" name="date" type="date" placeholder="Date" required>
-    <div>
-        {%  for tag in tags %}
+    <br>
+     <details class="tag-selector">
+        <summary>Tags</summary>
+        <div class="modal">
+           {%  for tag in tags %}
+           <div>
             <label>
+                <input name="tag" type="checkbox" value="{{ tag.uid }}" onchange="selectTagClick(this);">
                 {{ tag.value }}
-                <input name="tag" type="checkbox" value="{{ tag.uid }}">
             </label>
+            </div>
         {% endfor %}
-    </div>
+        </div>
+    </details>
+    <span class="tag-list"></span>
 	<button type="submit">Create</button>
 </form>
 
 <form method="GET" id="entry-filter">
-    <div>
-    {%  for tag in tags %}
-        <label>
-            {{ tag.value }}
-            <input name="tag" type="checkbox" value="{{ tag.uid }}">
-        </label>
-    {% endfor %}
-    </div>
     <button id="filter-button" type="button">Filter</button>
+    <details class="tag-selector">
+        <summary>Tags</summary>
+        <div class="modal">
+           {%  for tag in tags %}
+           <div>
+            <label>
+                <input name="tag" type="checkbox" value="{{ tag.uid }}">
+                {{ tag.value }}
+            </label>
+            </div>
+        {% endfor %}
+        </div>
+    </details>
 </form>
 <table class="entry-table">
     <tr>

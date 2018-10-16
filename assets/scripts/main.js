@@ -1,5 +1,12 @@
 'use strict';
 
+function instantiateTemplate(templateId)
+{
+    let template = document.querySelector(templateId);
+    
+    return template.content.cloneNode(true);
+}
+
 window.addEventListener("load", function(event) {
     var date = document.getElementById("date");
 
@@ -64,3 +71,8 @@ window.addEventListener("load", function(event) {
         });
     }
 });
+
+function selectTagClick(tag) {
+    console.log(tag.checked);
+}
+

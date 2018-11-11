@@ -2,7 +2,7 @@
   "name": "gulp-dependencies",
   "version": "1.0.0",
   "dependencies": {
-    "gulp": "^3.9.1",
+    "gulp": "^4",
     "gulp-sass": "^4.0.1",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.0",

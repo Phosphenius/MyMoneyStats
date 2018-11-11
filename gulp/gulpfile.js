@@ -1,10 +1,10 @@
 'use strict';
 
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var sourcemaps = require('gulp-sourcemaps');
-var pump = require('pump');
-var uglify = require('gulp-uglify-es').default;
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const sourcemaps = require('gulp-sourcemaps');
+const pump = require('pump');
+const uglify = require('gulp-uglify-es').default;
 
 gulp.task('default', function() {
     ;
@@ -26,6 +26,6 @@ gulp.task('uglify', function (cb) {
 });
 
 gulp.task('watch', function () {
-    gulp.watch('../assets/styles/**/*.scss', ['sass']);
-    gulp.watch('../assets/scripts/*.js', ['uglify']);
+    gulp.watch('../assets/styles/**/*.scss', gulp.series('sass'));
+    gulp.watch('../assets/scripts/*.js', gulp.series('uglify'));
 });

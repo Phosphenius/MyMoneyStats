@@ -50,17 +50,16 @@ def get_rows(query, args=()):
 @app.route('/')
 @login_required
 def index():
-
-    query = 'SELECT SUM(amount) FROM accounting_entry WHERE NOT deleted'
-    balance = get_rows(query)[0][0]
-
     today = datetime.today()
     first = int(datetime(today.year, today.month, 1).timestamp())
     query = '''SELECT SUM(amount) FROM accounting_entry WHERE
-               amount < 0 AND date >= (?) AND NOT deleted'''
-    spending = get_rows(query, (first,))[0][0]
+               date >= (?) AND NOT deleted'''
+    m_spending = get_rows(query, (first,))[0][0]
+    
+    if not m_spending:
+        m_spending = 0
 
-    return render_template('index.html', balance=balance, spending=spending)
+    return render_template('index.html', m_spending=m_spending)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -192,4 +191,3 @@ def get_entries(year=2, month=1, day=1):
         entry['tags'] = [tag._asdict() for tag in entry['tags']]
 
     return jsonify(acc_entries)
-

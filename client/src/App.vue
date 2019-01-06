@@ -1,28 +1,93 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <nav class="navigation">
+      <ul>
+        <li>
+          <router-link to="/">Home</router-link>
+        </li>
+        <li>
+          <router-link to="/entries">Entries</router-link>
+        </li>
+        <li>
+          <router-link to="/tags">Tags</router-link>
+        </li>
+        <li>
+          <router-link to="/logout">Logout</router-link>
+        </li>
+      </ul>
+    </nav>
     <router-view/>
   </div>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+$bg: #fff;
+$bg-ctrl: #cedbf6;
+$disabled-ctrl: #4576db;
+$secondary: #f5deb3;
+$primary: #6495ed;
+
+body,
+ul {
+  padding: 0;
+  margin: 0;
 }
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: $primary;
+}
+
+details {
+  display: inline;
+}
+
+body {
+  padding-top: 35px;
+}
+
+.navigation {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+
+  background: $primary;
+
+  ul {
+    display: flex;
+
+    li {
+      &:hover {
+        background: #c0c0ff;
+      }
+
+      &:last-child {
+        margin-left: auto;
+      }
+    }
+
+    .router-link-exact-active {
+      background: #8585e0;
+
+      a {
+        pointer-events: none;
+        cursor: default;
+      }
+
+      &:hover {
+        background: #8585e0;
+      }
+    }
+
+    a {
+      display: block;
+      padding: 8px;
+      color: #111;
     }
   }
 }

@@ -26,6 +26,13 @@ export default new Router({
       component: function () { 
         return import(/* webpackChunkName: "tags" */ './views/Tags.vue')
       }
+    },
+    {
+      path: '*',
+      name: '404',
+      component: function () {
+        return import(/* webpackChunkName: "404" */ './views/NotFound.vue')
+      }
     }
   ]
 })

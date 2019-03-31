@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form novalidate class="md-layout" @submit.prevent="validateUser">
+    <form novalidate class="md-layout" @submit.prevent="validateEntry">
       <md-card class="md-layout-item md-size-50 md-small-size-100">
         <md-card-header>
           <div class="md-title">Add Entry</div>
@@ -17,7 +17,7 @@
                   v-model="entry.title"
                   :disabled="sending"
                 />
-                <span class="md-error" v-if="!$v.entry.title.required">The title</span>
+                <span class="md-error" v-if="!$v.entry.title.required">The title is required</span>
                 <span class="md-error" v-else-if="!$v.entry.title.minlength">Invalid title</span>
               </md-field>
             </div>
@@ -38,15 +38,17 @@
             </div>
 
             <div class="md-layout-item md-small-size-100">
-              <md-datepicker :class="getValidationClass('amount')" v-model="entry.date">
+              <md-datepicker
+                v-model="entry.date"
+                :disabled="sending"
+              >
                 <label>Date</label>
-                <span class="md-error" v-if="!$v.entry.date.required">The date is required</span>
               </md-datepicker>
             </div>
           </div>
         </md-card-content>
         <md-card-actions>
-          <md-button class="md-icon-button md-raised md-primary">
+          <md-button type="submit" class="md-icon-button md-raised md-primary" :disabled="sending">
             <md-icon>add</md-icon>
           </md-button>
         </md-card-actions>
@@ -58,6 +60,8 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, minLength, decimal } from "vuelidate/lib/validators";
+
+import EntryService from "@/services/AccoutingEntryService";
 
 export default {
   name: "entries",
@@ -79,9 +83,6 @@ export default {
       amount: {
         required,
         decimal
-      },
-      date: {
-        required
       }
     }
   },
@@ -94,6 +95,31 @@ export default {
           "md-invalid": field.$invalid && field.$dirty
         };
       }
+    },
+    validateEntry() {
+      this.$v.$touch();
+
+      if (!this.$v.$invalid) {
+        this.submit();
+      }
+    },
+    submit() {
+      this.sending = true;
+      EntryService.create(this.entry)
+        .then()
+        .catch(err => {
+          console.log(err);
+        })
+        .then(() => {
+          this.sending = false;
+          this.clearForm()
+        });
+    },
+    clearForm() {
+      this.$v.$reset();
+      this.entry.title = null,
+      this.entry.amount = null,
+      this.entry.date = new Date()
     }
   }
 };

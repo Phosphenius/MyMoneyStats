@@ -51,10 +51,12 @@ export default {
   name: "app",
   data: () => ({
     menuVisible: false
-  })
+  }),
+  async mounted() {
+    this.$store.dispatch("getEntries");
+  }
 };
 </script>
 
 <style lang="scss">
-
 </style>

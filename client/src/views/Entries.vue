@@ -54,6 +54,7 @@
         </md-card-actions>
       </md-card>
     </form>
+    <entrylist />
   </div>
 </template>
 
@@ -61,10 +62,12 @@
 import { validationMixin } from "vuelidate";
 import { required, minLength, decimal } from "vuelidate/lib/validators";
 
-import EntryService from "@/services/AccoutingEntryService";
+import entrylist from "@/components/EntryList.vue"
+
 
 export default {
   name: "entries",
+  components: {entrylist},
   mixins: [validationMixin],
   data: () => ({
     entry: {
@@ -105,11 +108,7 @@ export default {
     },
     submit() {
       this.sending = true;
-      EntryService.create(this.entry)
-        .then()
-        .catch(err => {
-          console.log(err);
-        })
+      this.$store.dispatch('createEntry', this.entry)
         .then(() => {
           this.sending = false;
           this.clearForm()

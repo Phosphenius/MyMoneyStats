@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-table v-model="$store.state.entries" md-sort="amount" md-sort-order="asc" md-fixed-header>
+    <md-table v-model="$store.state.entry.entries" md-sort="amount" md-sort-order="asc" md-fixed-header>
       <md-table-toolbar>
         <h1 class="md-title">Entries</h1>
       </md-table-toolbar>

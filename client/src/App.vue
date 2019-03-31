@@ -54,6 +54,7 @@ export default {
   }),
   async mounted() {
     this.$store.dispatch("getEntries");
+    this.$store.dispatch("getTags");
   }
 };
 </script>

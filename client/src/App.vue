@@ -1,94 +1,60 @@
 <template>
   <div id="app">
-    <nav class="navigation">
-      <ul>
-        <li>
-          <router-link to="/">Home</router-link>
-        </li>
-        <li>
-          <router-link to="/entries">Entries</router-link>
-        </li>
-        <li>
-          <router-link to="/tags">Tags</router-link>
-        </li>
-        <li>
-          <router-link to="/logout">Logout</router-link>
-        </li>
-      </ul>
-    </nav>
-    <router-view/>
+    <md-app md-mode="reveal">
+      <md-app-toolbar class="md-primary">
+        <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
+          <md-icon>menu</md-icon>
+        </md-button>
+
+        <md-tabs md-sync-route class="md-primary">
+          <md-tab md-label="Home" to="/home"></md-tab>
+          <md-tab md-label="Entries" to="/entries"></md-tab>
+          <md-tab md-label="Tags" to="/tags"></md-tab>
+        </md-tabs>
+      </md-app-toolbar>
+
+      <md-app-drawer :md-active.sync="menuVisible">
+        <md-toolbar class="md-transparent" md-elevation="0">Navigation</md-toolbar>
+
+        <md-list>
+          <md-list-item>
+            <md-icon>move_to_inbox</md-icon>
+            <span class="md-list-item-text">Inbox</span>
+          </md-list-item>
+
+          <md-list-item>
+            <md-icon>send</md-icon>
+            <span class="md-list-item-text">Sent Mail</span>
+          </md-list-item>
+
+          <md-list-item>
+            <md-icon>delete</md-icon>
+            <span class="md-list-item-text">Trash</span>
+          </md-list-item>
+
+          <md-list-item>
+            <md-icon>error</md-icon>
+            <span class="md-list-item-text">Spam</span>
+          </md-list-item>
+        </md-list>
+      </md-app-drawer>
+
+      <md-app-content>
+        <router-view></router-view>
+      </md-app-content>
+    </md-app>
   </div>
 </template>
 
+<script>
+export default {
+  name: "app",
+  data: () => ({
+    menuVisible: false
+  })
+};
+</script>
+
 <style lang="scss">
-$bg: #fff;
-$bg-ctrl: #cedbf6;
-$disabled-ctrl: #4576db;
-$secondary: #f5deb3;
-$primary: #6495ed;
 
-body,
-ul {
-  padding: 0;
-  margin: 0;
-}
-
-ul {
-  list-style: none;
-}
-
-a {
-  text-decoration: none;
-  color: $primary;
-}
-
-details {
-  display: inline;
-}
-
-body {
-  padding-top: 35px;
-}
-
-.navigation {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-
-  background: $primary;
-
-  ul {
-    display: flex;
-
-    li {
-      &:hover {
-        background: #c0c0ff;
-      }
-
-      &:last-child {
-        margin-left: auto;
-      }
-    }
-
-    .router-link-exact-active {
-      background: #8585e0;
-
-      a {
-        pointer-events: none;
-        cursor: default;
-      }
-
-      &:hover {
-        background: #8585e0;
-      }
-    }
-
-    a {
-      display: block;
-      padding: 8px;
-      color: #111;
-    }
-  }
-}
 </style>

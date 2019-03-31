@@ -1,8 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import Entries from './views/Entries.vue'
+import Tags from './views/Tags.vue'
+
 
 Vue.use(Router)
+
+// More details: https://github.com/vuematerial/vue-material/issues/1977
+Vue.component('router-link', Vue.options.components.RouterLink)
+Vue.component('router-view', Vue.options.components.RouterView)
 
 export default new Router({
   mode: 'history',
@@ -16,23 +23,12 @@ export default new Router({
     {
       path: '/entries',
       name: 'entries',
-      component: function () { 
-        return import(/* webpackChunkName: "entries" */ './views/Entries.vue')
-      }
+      component: Entries
     },
     {
       path: '/tags',
       name: 'tags',
-      component: function () { 
-        return import(/* webpackChunkName: "tags" */ './views/Tags.vue')
-      }
-    },
-    {
-      path: '*',
-      name: '404',
-      component: function () {
-        return import(/* webpackChunkName: "404" */ './views/NotFound.vue')
-      }
+      component: Tags
     }
   ]
 })

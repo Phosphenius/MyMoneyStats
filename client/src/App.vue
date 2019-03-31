@@ -7,7 +7,7 @@
         </md-button>
 
         <md-tabs md-sync-route class="md-primary">
-          <md-tab md-label="Home" to="/home"></md-tab>
+          <md-tab md-label="Home" to="/"></md-tab>
           <md-tab md-label="Entries" to="/entries"></md-tab>
           <md-tab md-label="Tags" to="/tags"></md-tab>
         </md-tabs>

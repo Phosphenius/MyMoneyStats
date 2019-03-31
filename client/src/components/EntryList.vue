@@ -1,32 +1,21 @@
 <template>
   <div>
-    <md-table>
-       <md-table-row>
-        <md-table-head md-numeric>ID</md-table-head>
-        <md-table-head>Amount</md-table-head>
-        <md-table-head>Title</md-table-head>
-      </md-table-row>
+    <md-table v-model="$store.state.entries" md-sort="amount" md-sort-order="asc" md-fixed-header>
+      <md-table-toolbar>
+        <h1 class="md-title">Entries</h1>
+      </md-table-toolbar>
 
-      <md-table-row v-for="entry in entryList" :key="entry.id"> 
-        <md-table-cell md-numeric>{{ entry.id }}</md-table-cell>
-        <md-table-cell>{{ entry.amount }}</md-table-cell>
-        <md-table-cell>{{ entry.title }}</md-table-cell>
+      <md-table-row slot="md-table-row" slot-scope="{ item }">
+        <md-table-cell md-label="ID" md-sort-by="id">{{ item.id }}</md-table-cell>
+        <md-table-cell md-label="Amount" md-sort-by="amount">{{ item.amount }}</md-table-cell>
+        <md-table-cell md-label="Title" md-sort-by="title">{{ item.title }}</md-table-cell>
       </md-table-row>
     </md-table>
   </div>
 </template>
 
 <script>
-
-
 export default {
-  name: "EntryList",
-  computed: {
-    entryList: {
-      get () {
-        return this.$store.state.entries
-      }
-    }
-  }
-}
+  name: "EntryList"
+};
 </script>

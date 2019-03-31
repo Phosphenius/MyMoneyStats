@@ -9,6 +9,8 @@ settings.cfg
 /db/
 .vagrant/
 
+*.sqlite
+
 .DS_Store
 dist
 

@@ -29,6 +29,10 @@ export default new Router({
       path: '/tags',
       name: 'tags',
       component: Tags
+    },
+    {
+      path: '*',
+      redirect: '/'
     }
   ]
 })
